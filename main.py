@@ -1,25 +1,42 @@
+import math
 import random
+import sys
 import time
 
-# Generate some data
-data = random.sample(range(1, 100), 16)
-print(f"Data: {data}")
 
-# Put the data in a 4x4 grid
-grid = []
-i = 0
-for r in range(4):
-    row = []
-    for c in range(4):
-        row.append(data[i])
-        i += 1
-    grid.append(row)
+def get_grid_size(data_size):
+    return math.ceil(math.sqrt(data_size))
 
-# Do some really complex calculations...
-print("Working...")
-time.sleep(5)
+def main():
+    # Determine length of data from input parameter
+    # TODO: add input validation
+    data_size = int(sys.argv[1])
 
-# Display the grid
-print("Grid:")
-for row in grid:
-    print('\t'.join([str(i) for i in row]))
+    # Generate some data
+    data = random.sample(range(1, 100), data_size)
+    print(f"Data: {data}")
+
+    # Put the data in a grid
+    grid_size = get_grid_size(data_size)
+    grid = []
+    i = 0
+    for r in range(grid_size):
+        row = []
+        for c in range(grid_size):
+            row.append(data[i])
+            i += 1
+        grid.append(row)
+
+    # Do some really complex calculations...
+    print("Working...")
+    time.sleep(5)
+
+    # Display the grid
+    print("Grid:")
+    for row in grid:
+        print('\t'.join([str(i) for i in row]))
+
+
+if __name__ == '__main__':
+    # Execute when the module is not initialized from an import statement.
+    main()
